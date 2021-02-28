@@ -6,7 +6,7 @@ public class Test {
 		// TODO Auto-generated method stub
 		ProxyUtil proxy = new ProxyUtil(new Calculate());
 		Calculate_interface proxy_new = (Calculate_interface)proxy.getProxy();
-		int x = proxy_new.add(6, 7);
+		int x = proxy_new.div(4, 0);
 		System.out.print(x);
 	}
 

@@ -22,10 +22,21 @@ public class ProxyUtil {
 		
 		InvocationHandler handler = new InvocationHandler() {
 			@Override
-			public Object invoke(Object proxy, Method method, Object[] args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-				Logger.before(method.getName(), Arrays.toString(args));
-				Object result = method.invoke(cal, args); //動態代理對象實現功能
-				Logger.after(method.getName(), result);
+			public Object invoke(Object proxy, Method method, Object[] args) {
+				Object result = null;
+				try {
+					Logger.before(method.getName(), Arrays.toString(args));
+					result = method.invoke(cal, args);//動態代理對象實現功能
+					Logger.after(method.getName(), result);		
+				} catch (IllegalAccessException e) {
+					Logger.error();
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					Logger.error();
+					e.printStackTrace();;
+				} finally {
+						System.out.println("Finally check");
+				}
 				return result;
 			}
 		};
